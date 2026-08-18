@@ -1,0 +1,13 @@
+.venv-mcp/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
