@@ -33,6 +33,21 @@ class MCPClient:
             )
             self.session = await self.exit_stack.enter_async_context(FastMCPClient(transport))
         else:
+            # Some local environments inject proxy settings that break localhost MCP
+            # streamable-http calls with upstream 502. Force direct loopback access.
+            if "127.0.0.1" in target or "localhost" in target:
+                for k in [
+                    "HTTP_PROXY",
+                    "HTTPS_PROXY",
+                    "ALL_PROXY",
+                    "http_proxy",
+                    "https_proxy",
+                    "all_proxy",
+                ]:
+                    os.environ.pop(k, None)
+                os.environ["NO_PROXY"] = "127.0.0.1,localhost"
+                os.environ["no_proxy"] = "127.0.0.1,localhost"
+
             self.session = await self.exit_stack.enter_async_context(FastMCPClient(target))
 
         tools = await self.session.list_tools()
