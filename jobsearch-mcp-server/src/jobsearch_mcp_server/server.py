@@ -56,10 +56,10 @@ class JobSearchMCPServer:
         """Register all MCP tools."""
         # Initialize tool classes
         job_tools = JobTools(self.logger)
-        #resume_tools = ResumeTools()
+        resume_tools = ResumeTools()
 
         job_tools.register_tools(self.mcp)
-        #resume_tools.register_tools(self.mcp)
+        resume_tools.register_tools(self.mcp)
 
     def run(self):
         """Run the MCP server."""

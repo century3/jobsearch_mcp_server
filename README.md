@@ -34,6 +34,26 @@ d:/AIAgent-main/第4章/4.6/.venv-mcp/Scripts/python.exe client.py stdio
 以下是我的简历，请帮我匹配合适的工作： 姓名：张三 专业技能：精通AI Agent ,RAG 开发 工作经验：5年 教育背景：本科 期望薪资：30K
 ```
 
+### 4) Run client with a local resume file (streamable HTTP)
+
+Start the HTTP server first, then:
+
+```powershell
+chcp 65001
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
+Set-Location "d:/AIAgent-main/第4章/4.6/jobsearch-mcp-client"
+d:/AIAgent-main/第4章/4.6/.venv-mcp/Scripts/python.exe client.py http://127.0.0.1:18082/mcp
+```
+
+At the `Query:` prompt, paste the local Word resume path:
+
+```text
+d:\AIAgent-main\第4章\4.6\jobsearch-mcp-server\src\jobsearch_mcp_server\王春明_高级软件测试工程师.docx
+```
+
+The client reads the `.docx` via `get_word_by_filepath`, then matches jobs. On Windows, set UTF-8 first to avoid garbled Chinese paths.
+
 ## Notes
 
 - Streamable HTTP mode may fail in some local version combinations.

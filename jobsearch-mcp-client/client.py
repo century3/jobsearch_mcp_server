@@ -63,6 +63,17 @@ class MCPClient:
             return "No tools available from server."
 
         tool_names = [tool.name for tool in tools]
+        resume = query
+        query_path = Path(query)
+
+        if "get_word_by_filepath" in tool_names and query_path.suffix.lower() == ".docx":
+            filepath = str(query_path.resolve()) if query_path.exists() else query
+            word_result = await self.session.call_tool(
+                "get_word_by_filepath",
+                {"filepath": filepath},
+            )
+            resume = self._tool_result_to_text(word_result)
+            print(f"\nLoaded resume from: {filepath}")
 
         # Prefer resume matching flow whenever the server provides this tool.
         # This avoids accidentally returning a raw full job list for resume queries.
@@ -72,7 +83,7 @@ class MCPClient:
 
             match_result = await self.session.call_tool(
                 "get_job_by_resume",
-                {"jobs": jobs_text, "resume": query},
+                {"jobs": jobs_text, "resume": resume},
             )
             return self._tool_result_to_text(match_result)
 
