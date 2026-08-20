@@ -1,4 +1,4 @@
-# Chapter 4.6 MCP Project
+# Job Search  MCP Project
 
 This folder contains the MCP job-search demo used in Chapter 4.6.
 
