@@ -49,7 +49,7 @@ d:/AIAgent-main/第4章/4.6/.venv-mcp/Scripts/python.exe client.py http://127.0.
 At the `Query:` prompt, paste the local Word resume path:
 
 ```text
-d:\AIAgent-main\第4章\4.6\jobsearch-mcp-server\src\jobsearch_mcp_server\王春明_高级软件测试工程师.docx
+d:\AIAgent-main\第4章\4.6\jobsearch-mcp-server\src\jobsearch_mcp_server\高级软件测试工程师.docx
 ```
 
 The client reads the `.docx` via `get_word_by_filepath`, then matches jobs. On Windows, set UTF-8 first to avoid garbled Chinese paths.
